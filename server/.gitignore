@@ -32,6 +32,5 @@ lerna-debug.log*
 .env.production.local
 
 # Config
-
-/config/prod.json
-/config/dev.json
+/.environments/.env.prod
+/.environments/.env.dev
