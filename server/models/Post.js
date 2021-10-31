@@ -11,13 +11,21 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    username: {
+    content: {
       type: String,
       required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+      ref: "User",
     },
     categories: {
       type: Array,
       required: false,
+    },
+    tags: {
+      type: Array,
     },
   },
   { timestamps: true }

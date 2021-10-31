@@ -1,0 +1,27 @@
+.card {
+    background: #16151A;
+    border-radius: 1rem;
+    padding: 1rem
+}
+.cardHead {
+
+}
+
+.cardHeadTitle {
+    color: #ccc;
+    margin: 0 0 1rem;
+}
+
+.cardBody {
+
+}
+
+.cardHeadDescr {
+    color: #ddd;
+    font-weight: 400;
+    margin: 0;
+}
+
+.cardFoot {
+
+}
