@@ -5,6 +5,7 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
+const tagRoute = require("./routes/tags");
 const messageRoute = require("./routes/messages");
 const connectDB = require("./db");
 const { PORT } = require("./config/config");
@@ -44,6 +45,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoryRoute);
+app.use("/api/tags", tagRoute);
 app.use("/api/messages", messageRoute);
 
 app.get("*", (req, res) => {
