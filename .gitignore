@@ -2,3 +2,5 @@
 
 # Idea editors
 .idea/
+
+.DS_Store
