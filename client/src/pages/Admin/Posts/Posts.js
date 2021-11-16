@@ -31,15 +31,11 @@ export default function Posts() {
   return (
     <Box
       sx={{
-        marginTop: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <Typography component="h1" variant="h5">
-        Posts
-      </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

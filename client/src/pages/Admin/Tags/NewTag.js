@@ -1,5 +1,4 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
 import { useDispatch } from "react-redux";
 import { addTagRequestAsync } from "../../../redux/tags/tags.calls";
 import { TextField } from "@mui/material";
@@ -11,12 +10,12 @@ export default function NewTag() {
   const dispatch = useDispatch();
 
   const validationSchema = yup.object({
-    name: yup.string("Enter your tag name").required("Tag is required"),
+    title: yup.string("Enter some tag").required("Tag is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      title: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -27,27 +26,21 @@ export default function NewTag() {
 
   return (
     <>
-      <Typography component="h1" variant="h5">
-        New Tag
-      </Typography>
-
-      <div>
-        <form onSubmit={formik.handleSubmit}>
-          <TextField
-            fullWidth
-            id="tag"
-            name="name"
-            label="Tag"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
-          />
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            Submit
-          </Button>
-        </form>
-      </div>
+      <form onSubmit={formik.handleSubmit}>
+        <TextField
+          fullWidth
+          id="tag"
+          name="title"
+          label="Tag"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.touched.title && formik.errors.title}
+        />
+        <Button color="primary" variant="contained" fullWidth type="submit">
+          Submit
+        </Button>
+      </form>
     </>
   );
 }
