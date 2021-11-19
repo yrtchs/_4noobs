@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPostRequestAsync } from "../../redux/posts/posts.calls";
 import Card from "../../components/Card/Card";
-import history from "../../utils/history";
 
-const Blog = (props) => {
+const Post = (props) => {
   const dispatch = useDispatch();
   const {
     data: posts,
@@ -27,4 +26,4 @@ const Blog = (props) => {
   );
 };
 
-export default Blog;
+export default Post;

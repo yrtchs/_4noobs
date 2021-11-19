@@ -1,9 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchMessages } from "../../../redux/posts/posts.calls";
 import {
   Paper,
   Table,
@@ -14,7 +12,11 @@ import {
   TableRow,
 } from "@mui/material";
 import { formatIfNotExistData } from "../../../utils/general";
-import { fetchTagsRequestAsync } from "../../../redux/tags/tags.calls";
+import {
+  fetchTagsRequestAsync,
+  deleteTagRequestAsync,
+} from "../../../redux/tags/tags.calls";
+import Button from "@mui/material/Button";
 
 export default function Tags() {
   const dispatch = useDispatch();
@@ -28,6 +30,10 @@ export default function Tags() {
   useEffect(() => {
     dispatch(fetchTagsRequestAsync());
   }, []);
+
+  const handleDeleteTag = (id) => {
+    dispatch(deleteTagRequestAsync(id));
+  };
 
   return (
     <Box
@@ -43,6 +49,7 @@ export default function Tags() {
             <TableRow>
               <TableCell>Title</TableCell>
               <TableCell>Updated At</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -51,8 +58,16 @@ export default function Tags() {
                 key={tag._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell>{formatIfNotExistData(tag.title)}</TableCell>
+                <TableCell>{formatIfNotExistData(tag.name)}</TableCell>
                 <TableCell>{formatIfNotExistData(tag.updatedAt)}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleDeleteTag(tag._id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

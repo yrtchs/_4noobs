@@ -18,6 +18,7 @@ import Categories from "../Categories/Categories";
 import Tags from "../Tags/Tags";
 import NewTag from "../Tags/NewTag";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import NewCategory from "../Categories/NewCategory";
 
 const drawerWidth = 240;
 
@@ -113,6 +114,9 @@ function DashboardContent() {
                 </Route>
                 <Route path="/admin/posts" exact>
                   <Posts />
+                </Route>
+                <Route path="/admin/new-category" exact>
+                  <NewCategory />
                 </Route>
                 <Route path="/admin/categories" exact>
                   <Categories />

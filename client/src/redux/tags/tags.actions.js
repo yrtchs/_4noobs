@@ -27,3 +27,17 @@ export const addTagFailure = (errorMessage) => ({
   type: TagsActionTypes.ADD_TAG_FAILURE,
   payload: errorMessage,
 });
+
+export const deleteTagRequest = () => ({
+  type: TagsActionTypes.DELETE_TAG_REQUEST,
+});
+
+export const deleteTagSuccess = (id) => ({
+  type: TagsActionTypes.DELETE_TAG_SUCCESS,
+  payload: id,
+});
+
+export const deleteTagFailure = (errorMessage) => ({
+  type: TagsActionTypes.DELETE_TAG_FAILURE,
+  payload: errorMessage,
+});
