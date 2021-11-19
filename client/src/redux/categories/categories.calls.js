@@ -5,6 +5,9 @@ import {
   addCategoryRequest,
   addCategorySuccess,
   addCategoryFailure,
+  deleteCategoryRequest,
+  deleteCategorySuccess,
+  deleteCategoryFailure,
 } from "./categories.actions";
 import { api } from "../../api/api";
 
@@ -19,11 +22,21 @@ export const fetchCategoriesRequestAsync = () => async (dispatch) => {
 };
 
 export const addCategoryRequestAsync = (payload) => async (dispatch) => {
-  dispatch(addCategoryRequest);
+  dispatch(addCategoryRequest());
   try {
-    const res = await api.post("/categories", { payload });
+    const res = await api.post("/categories", payload);
     dispatch(addCategorySuccess(res.data));
   } catch (err) {
-    dispatch(addCategoryFailure());
+    dispatch(addCategoryFailure(err));
+  }
+};
+
+export const deleteCategoryRequestAsync = (id) => async (dispatch) => {
+  dispatch(deleteCategoryRequest());
+  try {
+    await api.delete(`/categories/${id}`);
+    dispatch(deleteCategorySuccess(id));
+  } catch (err) {
+    dispatch(deleteCategoryFailure(err));
   }
 };

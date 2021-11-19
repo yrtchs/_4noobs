@@ -1,4 +1,5 @@
 import TagsActionTypes from "./tags.types";
+import { deleteItem } from "../../utils/modifier";
 
 const initialState = {
   data: [],
@@ -10,6 +11,7 @@ const initialState = {
 const tagsReducer = (state = initialState, action) => {
   switch (action.type) {
     case TagsActionTypes.FETCH_TAGS_REQUEST:
+    case TagsActionTypes.DELETE_TAG_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -22,7 +24,15 @@ const tagsReducer = (state = initialState, action) => {
         data: action.payload,
       };
 
+    case TagsActionTypes.DELETE_TAG_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        data: deleteItem(state.data, action.payload),
+      };
+
     case TagsActionTypes.FETCH_TAGS_FAILURE:
+    case TagsActionTypes.DELETE_TAG_FAILURE:
       return {
         ...state,
         isFetching: false,

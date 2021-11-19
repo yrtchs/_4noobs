@@ -1,9 +1,11 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchMessages } from "../../../redux/posts/posts.calls";
+import {
+  fetchPostRequestAsync,
+  deletePostRequestAsync,
+} from "../../../redux/posts/posts.calls";
 import {
   Paper,
   Table,
@@ -14,6 +16,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { formatIfNotExistData } from "../../../utils/general";
+import Button from "@mui/material/Button";
 
 export default function Posts() {
   const dispatch = useDispatch();
@@ -25,21 +28,21 @@ export default function Posts() {
   } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(fetchMessages());
+    dispatch(fetchPostRequestAsync());
   }, []);
+
+  const handleDeletePost = (id) => {
+    dispatch(deletePostRequestAsync(id));
+  };
 
   return (
     <Box
       sx={{
-        marginTop: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <Typography component="h1" variant="h5">
-        Posts
-      </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -49,6 +52,7 @@ export default function Posts() {
               <TableCell>Tags</TableCell>
               <TableCell>Author</TableCell>
               <TableCell>Updated At</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -62,6 +66,14 @@ export default function Posts() {
                 <TableCell>{formatIfNotExistData(post.categories)}</TableCell>
                 <TableCell>{formatIfNotExistData(post.author)}</TableCell>
                 <TableCell>{formatIfNotExistData(post.updatedAt)}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleDeletePost(post._id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

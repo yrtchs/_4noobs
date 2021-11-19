@@ -27,3 +27,17 @@ export const addCategoryFailure = (errorMessage) => ({
   type: CategoriesActionTypes.ADD_CATEGORY_FAILURE,
   payload: errorMessage,
 });
+
+export const deleteCategoryRequest = () => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_REQUEST,
+});
+
+export const deleteCategorySuccess = (id) => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_SUCCESS,
+  payload: id,
+});
+
+export const deleteCategoryFailure = (errorMessage) => ({
+  type: CategoriesActionTypes.DELETE_CATEGORY_FAILURE,
+  payload: errorMessage,
+});

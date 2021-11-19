@@ -19,11 +19,7 @@ import { useSelector } from "react-redux";
 import SignIn from "../../pages/Auth/SignIn";
 import SignUp from "../../pages/Auth/SignUp";
 import history from "../../utils/history";
-import CreatePost from "../../pages/Admin/CreatePost/CreatePost";
-import Posts from "../../pages/Admin/Posts/Posts";
-import Categories from "../../pages/Admin/Categories/Categories";
-import Tags from "../../pages/Admin/Tags/Tags";
-import NewTag from "../../pages/Admin/Tags/NewTag";
+import Dashboard from "../../pages/Admin/Dashboard/Dashboard";
 
 const themeOverride = createMuiTheme({
   palette: {
@@ -268,20 +264,8 @@ const App = () => {
             <Route path="/" exact>
               <Blog />
             </Route>
-            <Route path="/admin/create-post" exact>
-              <CreatePost />
-            </Route>
-            <Route path="/admin/posts" exact>
-              <Posts />
-            </Route>
-            <Route path="/admin/categories" exact>
-              <Categories />
-            </Route>
-            <Route path="/admin/tags" exact>
-              <Tags />
-            </Route>
-            <Route path="/admin/new-tag" exact>
-              <NewTag />
+            <Route path="/admin">
+              <Dashboard />
             </Route>
           </Switch>
         </Container>

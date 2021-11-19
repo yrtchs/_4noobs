@@ -1,9 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchMessages } from "../../../redux/posts/posts.calls";
 import {
   Paper,
   Table,
@@ -14,55 +12,62 @@ import {
   TableRow,
 } from "@mui/material";
 import { formatIfNotExistData } from "../../../utils/general";
-import { fetchTagsRequestAsync } from "../../../redux/tags/tags.calls";
+import {
+  fetchTagsRequestAsync,
+  deleteTagRequestAsync,
+} from "../../../redux/tags/tags.calls";
+import Button from "@mui/material/Button";
 
 export default function Tags() {
   const dispatch = useDispatch();
   const {
-    data: posts,
+    data: tags,
     errorMessage,
     isFetching,
     message,
-  } = useSelector((state) => state.posts);
+  } = useSelector((state) => state.tags);
 
   useEffect(() => {
     dispatch(fetchTagsRequestAsync());
   }, []);
 
+  const handleDeleteTag = (id) => {
+    dispatch(deleteTagRequestAsync(id));
+  };
+
   return (
     <Box
       sx={{
-        marginTop: 8,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
       }}
     >
-      <Typography component="h1" variant="h5">
-        Posts
-      </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Title</TableCell>
-              <TableCell>Categories</TableCell>
-              <TableCell>Tags</TableCell>
-              <TableCell>Author</TableCell>
               <TableCell>Updated At</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {posts.map((post) => (
+            {tags.map((tag) => (
               <TableRow
-                key={post._id}
+                key={tag._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell>{formatIfNotExistData(post.title)}</TableCell>
-                <TableCell>{formatIfNotExistData(post.tags)}</TableCell>
-                <TableCell>{formatIfNotExistData(post.categories)}</TableCell>
-                <TableCell>{formatIfNotExistData(post.author)}</TableCell>
-                <TableCell>{formatIfNotExistData(post.updatedAt)}</TableCell>
+                <TableCell>{formatIfNotExistData(tag.name)}</TableCell>
+                <TableCell>{formatIfNotExistData(tag.updatedAt)}</TableCell>
+                <TableCell>
+                  <Button
+                    variant="contained"
+                    onClick={() => handleDeleteTag(tag._id)}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

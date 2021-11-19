@@ -7,6 +7,10 @@ const CategorySchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    descr: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

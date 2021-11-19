@@ -6,6 +6,9 @@ import {
   addTagFailure,
   addTagSuccess,
   addTagRequest,
+  deleteTagRequest,
+  deleteTagSuccess,
+  deleteTagFailure,
 } from "./tags.actions";
 
 export const fetchTagsRequestAsync = () => async (dispatch) => {
@@ -18,12 +21,24 @@ export const fetchTagsRequestAsync = () => async (dispatch) => {
   }
 };
 
-export const addTagRequestAsync = (payload) => async (dispatch) => {
-  dispatch(addTagRequest);
+export const addTagRequestAsync =
+  ({ name }) =>
+  async (dispatch) => {
+    dispatch(addTagRequest());
+    try {
+      const res = await api.post("/tags", { name });
+      dispatch(addTagSuccess(res.data));
+    } catch (err) {
+      dispatch(addTagFailure(err));
+    }
+  };
+
+export const deleteTagRequestAsync = (id) => async (dispatch) => {
+  dispatch(deleteTagRequest());
   try {
-    const res = await api.post("/tags", { payload });
-    dispatch(addTagSuccess(res.data));
+    await api.delete(`/tags/${id}`);
+    dispatch(deleteTagSuccess(id));
   } catch (err) {
-    dispatch(addTagFailure());
+    dispatch(deleteTagFailure(err));
   }
 };
